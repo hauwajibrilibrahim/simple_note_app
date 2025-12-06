@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:note_app/pages/create_edit_note_page.dart';
 import 'package:note_app/pages/note_list_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:note_app/pages/noteview_page.dart';
 import 'firebase_options.dart';
 
 import 'package:provider/provider.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(primarySwatch: Colors.pink, fontFamily: 'Roboto'),
         routes: {
           '/': (context) => const NoteListPage(),
-          '/create-edit-note': (context) => const CreateEditNotePage(),
+          '/create-edit-note': (context) => CreateEditNotePage(),
         },
       ),
     );

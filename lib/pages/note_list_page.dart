@@ -72,7 +72,7 @@ class _NoteListPageState extends State<NoteListPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const CreateEditNotePage()),
+            MaterialPageRoute(builder: (context) => CreateEditNotePage()),
           );
         },
         backgroundColor: const Color(0xFFE03FD8),

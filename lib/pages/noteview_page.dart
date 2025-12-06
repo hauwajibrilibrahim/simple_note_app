@@ -10,19 +10,15 @@ import 'create_edit_note_page.dart';
 class NoteDetailPage extends StatelessWidget {
   final Note note;
 
-  const NoteDetailPage({Key? key, required this.note}) : super(key: key);
+  const NoteDetailPage({super.key, required this.note});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppConstants.getColorFromHex(note.color),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white70,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
         actions: [
           // Edit button
           IconButton(

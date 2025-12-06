@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/models/note.dart';
+import 'package:note_app/pages/noteview_page.dart';
 import 'package:note_app/provider/note_provider.dart';
 import 'package:note_app/utils/constant.dart';
 import 'package:note_app/widgets/color_selector.dart';
@@ -60,9 +61,10 @@ class _CreateEditNotePageState extends State<CreateEditNotePage> {
                 listen: false,
               );
 
+              final Note updatedNote;
               if (widget.note != null) {
                 // Update existing note
-                final updatedNote = widget.note!.copyWith(
+                updatedNote = widget.note!.copyWith(
                   title: _titleController.text,
                   content: _contentController.text,
                   color: _selectedColor,
@@ -71,7 +73,7 @@ class _CreateEditNotePageState extends State<CreateEditNotePage> {
                 await provider.updateNote(updatedNote);
               } else {
                 // Create new note
-                final newNote = Note(
+                updatedNote = Note(
                   id: const Uuid().v4(),
                   title: _titleController.text,
                   content: _contentController.text,
@@ -79,10 +81,15 @@ class _CreateEditNotePageState extends State<CreateEditNotePage> {
                   createdAt: DateTime.now(),
                   updatedAt: DateTime.now(),
                 );
-                await provider.addNote(newNote);
+                await provider.addNote(updatedNote);
               }
               if (mounted) {
-                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NoteDetailPage(note: updatedNote),
+                  ),
+                );
               }
             },
             icon: const Icon(Icons.check, color: Colors.black87),

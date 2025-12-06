@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:note_app/models/note.dart';
 
-final List <Note> dummyNotes = [
+final List<Note> dummyNotes = [
   Note(
     id: '1',
     title: 'Grocery List',
     content: 'Milk, Eggs, Bread, Butter',
     color: '#FFB3E5FC',
     createdAt: DateTime.now(),
-    updatedAt: DateTime.now()
+    updatedAt: DateTime.now(),
   ),
   Note(
     id: '2',
@@ -16,7 +15,7 @@ final List <Note> dummyNotes = [
     content: 'Discuss project timeline and deliverables.',
     color: '#FFB3E5FC',
     createdAt: DateTime.now(),
-    updatedAt: DateTime.now()
+    updatedAt: DateTime.now(),
   ),
   Note(
     id: '3',
@@ -24,6 +23,6 @@ final List <Note> dummyNotes = [
     content: 'Monday: Chest\nTuesday: Back\nWednesday: Legs',
     color: '#FFF8BBD0',
     createdAt: DateTime.now(),
-    updatedAt: DateTime.now()
+    updatedAt: DateTime.now(),
   ),
 ];
