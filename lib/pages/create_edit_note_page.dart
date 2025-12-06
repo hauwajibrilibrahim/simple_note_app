@@ -1,10 +1,14 @@
-
 import 'package:flutter/material.dart';
+import 'package:note_app/models/note.dart';
+import 'package:note_app/provider/note_provider.dart';
 import 'package:note_app/utils/constant.dart';
 import 'package:note_app/widgets/color_selector.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class CreateEditNotePage extends StatefulWidget {
-  const CreateEditNotePage({super.key});
+  final Note? note;
+  const CreateEditNotePage({super.key, this.note});
 
   @override
   State<CreateEditNotePage> createState() => _CreateEditNotePageState();
@@ -14,32 +18,82 @@ class _CreateEditNotePageState extends State<CreateEditNotePage> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
   String _selectedColor = '';
+
   @override
   void initState() {
     super.initState();
-    _selectedColor = AppConstants.getHexFromColor(AppConstants.noteColors[0]);
+    if (widget.note != null) {
+      _titleController.text = widget.note!.title;
+      _contentController.text = widget.note!.content;
+      _selectedColor = widget.note!.color;
+    } else {
+      _selectedColor = AppConstants.getHexFromColor(AppConstants.noteColors[0]);
+    }
   }
+
   @override
   void dispose() {
     _titleController.dispose();
     _contentController.dispose();
     super.dispose();
   }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppConstants.getColorFromHex(_selectedColor),
-      
+      backgroundColor: AppConstants.getColorFromHex(_selectedColor),
       appBar: AppBar(
         backgroundColor: Colors.white70,
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.check, color: Colors.black87,)),
+          IconButton(
+            onPressed: () async {
+              if (_titleController.text.isEmpty &&
+                  _contentController.text.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Title or Content is required')),
+                );
+                return;
+              }
+
+              final provider = Provider.of<NoteProvider>(
+                context,
+                listen: false,
+              );
+
+              if (widget.note != null) {
+                // Update existing note
+                final updatedNote = widget.note!.copyWith(
+                  title: _titleController.text,
+                  content: _contentController.text,
+                  color: _selectedColor,
+                  updatedAt: DateTime.now(),
+                );
+                await provider.updateNote(updatedNote);
+              } else {
+                // Create new note
+                final newNote = Note(
+                  id: const Uuid().v4(),
+                  title: _titleController.text,
+                  content: _contentController.text,
+                  color: _selectedColor,
+                  createdAt: DateTime.now(),
+                  updatedAt: DateTime.now(),
+                );
+                await provider.addNote(newNote);
+              }
+              if (mounted) {
+                Navigator.pop(context);
+              }
+            },
+            icon: const Icon(Icons.check, color: Colors.black87),
+          ),
         ],
       ),
       body: Column(
         children: [
           ColorSelector(
             selectedColor: _selectedColor,
-            onColorSelected: (color){
+            onColorSelected: (color) {
               setState(() {
                 _selectedColor = color;
               });
@@ -68,10 +122,7 @@ class _CreateEditNotePageState extends State<CreateEditNotePage> {
                       hintText: 'Start writing your note...',
                       border: InputBorder.none,
                     ),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.black87,
-                    ),
+                    style: const TextStyle(fontSize: 18, color: Colors.black87),
                     maxLines: null,
                   ),
                 ],
@@ -79,8 +130,7 @@ class _CreateEditNotePageState extends State<CreateEditNotePage> {
             ),
           ),
         ],
-      )
-      
+      ),
     );
   }
 }
