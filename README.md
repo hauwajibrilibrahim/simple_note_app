@@ -9,7 +9,6 @@ A comprehensive Flutter-based Note Taking application that leverages Firebase fo
 -   **Delete Notes**: Remove unwanted notes to keep your list organized.
 -   **Real-time Sync**: Uses **Firebase Cloud Firestore** to sync notes instantly across devices.
 -   **State Management**: efficient state handling using the **Provider** package.
--   **Cross-Platform**: Runs smoothly on both **Android** and **iOS**.
 
 ## Screenshots
 
