@@ -14,10 +14,11 @@ A comprehensive Flutter-based Note Taking application that leverages Firebase fo
 ## Screenshots
 
 <div style="display: flex; gap: 10px; overflow-x: auto;">
-  <img src="screenshots/Screenshot_20251208_202509.png" width="200" alt="App Screenshot 1" />
-  <img src="screenshots/Screenshot_20251208_202855.png" width="200" alt="App Screenshot 2" />
-  <img src="screenshots/Screenshot_20251208_202957.png" width="200" alt="App Screenshot 3" />
-  <img src="screenshots/Screenshot_20251208_203921.png" width="200" alt="App Screenshot 4" />
+    <img src="screenshots/Screenshot_20251208_203921.png" width="200" alt="App Screenshot 1" />
+    <img src="screenshots/Screenshot_20251208_202509.png" width="200" alt="App Screenshot 2" />
+    <img src="screenshots/Screenshot_20251208_202957.png" width="200" alt="App Screenshot 3" />
+    <img src="screenshots/Screenshot_20251208_202855.png" width="200" alt="App Screenshot 4" />
+  
 </div>
 
 ## Tech Stack
