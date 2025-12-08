@@ -47,10 +47,9 @@ class _CreateEditNotePageState extends State<CreateEditNotePage> {
         actions: [
           IconButton(
             onPressed: () async {
-              if (_titleController.text.isEmpty &&
-                  _contentController.text.isEmpty) {
+              if (_contentController.text.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Title or Content is required')),
+                  const SnackBar(content: Text('Content is required')),
                 );
                 return;
               }
