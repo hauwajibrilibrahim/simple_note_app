@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/models/note.dart';
-import 'package:note_app/pages/noteview_page.dart';
 import 'package:note_app/provider/note_provider.dart';
 import 'package:note_app/utils/constant.dart';
 import 'package:note_app/widgets/color_selector.dart';
@@ -84,12 +83,7 @@ class _CreateEditNotePageState extends State<CreateEditNotePage> {
                 await provider.addNote(updatedNote);
               }
               if (mounted) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NoteDetailPage(note: updatedNote),
-                  ),
-                );
+                Navigator.pop(context);
               }
             },
             icon: const Icon(Icons.check, color: Colors.black87),
