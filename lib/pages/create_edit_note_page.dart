@@ -110,6 +110,7 @@ class _CreateEditNotePageState extends State<CreateEditNotePage> {
                     decoration: const InputDecoration(
                       hintText: 'Title',
                       border: InputBorder.none,
+                      hintStyle: TextStyle(color: Colors.black38),
                     ),
                     style: const TextStyle(
                       fontSize: 24,

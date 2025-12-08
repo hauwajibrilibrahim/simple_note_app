@@ -17,6 +17,8 @@ class NoteCard extends StatelessWidget {
       return 'Just now';
     } else if (difference.inHours < 1) {
       return '${difference.inMinutes} minutes ago';
+    } else if (difference.inHours < 24) {
+      return 'Today';
     } else if (difference.inDays == 1) {
       return 'Yesterday';
     } else {
