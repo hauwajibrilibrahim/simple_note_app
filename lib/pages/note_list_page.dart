@@ -18,6 +18,14 @@ class _NoteListPageState extends State<NoteListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16.0),
+          child: Image.asset(
+            'assets/images/app_icon.png',
+            width: 35,
+            height: 35,
+          ),
+        ),
         title: const Text(
           'My Notes',
           style: TextStyle(
@@ -29,48 +37,51 @@ class _NoteListPageState extends State<NoteListPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: StreamBuilder<List<Note>>(
-        stream: Provider.of<NoteProvider>(context).notesStream,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
-          if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text(
-                'No notes yet.\nTap + to create your first note!',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.black54),
-              ),
-            );
-          }
-
-          final notes = snapshot.data!;
-          return ListView.builder(
-            itemCount: notes.length,
-            itemBuilder: (context, index) {
-              final note = notes[index];
-              return NoteCard(
-                note: note,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NoteDetailPage(note: note),
-                    ),
-                  );
-                },
+      body: SafeArea(
+        minimum: EdgeInsets.only(top: 20),
+        child: StreamBuilder<List<Note>>(
+          stream: Provider.of<NoteProvider>(context).notesStream,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            }
+            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(
+                child: Text(
+                  'No notes yet.\nTap + to create your first note!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, color: Colors.black54),
+                ),
               );
-            },
-          );
-        },
+            }
+
+            final notes = snapshot.data!;
+            return ListView.builder(
+              itemCount: notes.length,
+              itemBuilder: (context, index) {
+                final note = notes[index];
+                return NoteCard(
+                  note: note,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NoteDetailPage(note: note),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          },
+        ),
       ),
       floatingActionButton: Container(
-        height: 70,
-        width: 70,
+        height: 60,
+        width: 60,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: const LinearGradient(

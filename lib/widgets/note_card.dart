@@ -32,7 +32,7 @@ class NoteCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: AppConstants.getColorFromHex(note.color),
           borderRadius: BorderRadius.circular(16),
