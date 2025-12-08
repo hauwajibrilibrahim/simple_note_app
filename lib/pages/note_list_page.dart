@@ -68,15 +68,45 @@ class _NoteListPageState extends State<NoteListPage> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => CreateEditNotePage()),
-          );
-        },
-        backgroundColor: const Color(0xFFE03FD8),
-        child: const Icon(Icons.add, size: 32, color: Colors.white),
+      floatingActionButton: Container(
+        height: 70,
+        width: 70,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: const LinearGradient(
+            colors: [
+              Color(0xFF9115D4), // Purple
+              Color(0xFFFECFEF), // Lighter pink
+              Color(0xFFE2525C), // Light pink
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomRight,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CreateEditNotePage()),
+            );
+          },
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          shape: const CircleBorder(),
+          child: const Icon(
+            Icons.add,
+            size: 34,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
